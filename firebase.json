@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/locus",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

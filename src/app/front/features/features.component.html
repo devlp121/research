@@ -1,0 +1,212 @@
+<div class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll banner ">
+
+      <div class=" mdl-layout__header-row mdl-layout--large-screen-only ">
+        <!-- Title -->
+        <span class="mdl-layout-title" routerLink="/">Research Locus</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation ">
+          <a class="mdl-navigation__link" href="">About</a>
+          <a class="mdl-navigation__link" href="">Prices</a>
+          <a class="mdl-navigation__link" href="">Portfolio</a>
+          <a class="mdl-navigation__link" [matMenuTriggerFor]="menu"><i class="material-icons">account_circle</i>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Account</button>
+              <button mat-menu-item routerLink="/login">Login</button>
+              <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
+          </a>
+        </nav>
+      </div>
+      <div class=" mdl-layout__header-row mdl-layout--small-screen-only">
+        <!-- Title -->
+        <span class="mdl-layout-title" routerLink="/">Research Locus</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation ">
+          <a class="mdl-navigation__link" [matMenuTriggerFor]="menu"><i class="material-icons">account_circle</i>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Account</button>
+              <button mat-menu-item routerLink="/login">Login</button>
+              <button mat-menu-item (click)="logout()">Logout</button>
+              <button mat-menu-item>About</button>
+              <button mat-menu-item>Prices</button>
+              <button mat-menu-item>Portfolio</button>
+            </mat-menu>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+              <div class="section__circle-container__circle mx-auto my-auto">       
+                <img alt="Thesis" class="serviceicon mx-auto d-flex justify-content-center" src="../assets/paper.svg">    
+              </div>
+            </div>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>Thesis</h4>
+                A thesis or dissertation is a document submitted in support of candidature for an academic degree or
+                professional qualification presenting the author's research and findings. In some contexts, thesis or a
+                cognate is used for part of a bachelor's or master's course, while dissertation is normally applied to
+                a
+                doctorate, while in other contexts, the reverse is true. The term graduate thesis is sometimes used to
+                refer to both master's theses and doctoral dissertations
+              </div>
+            </div>
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+              <div class="section__circle-container__circle ">       <img alt="Thesis" class="serviceicon mx-auto d-flex justify-content-center" src="../assets/pros-and-cons.svg"> 
+              </div>
+            </div>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>Court Submissions</h4>
+                A document intended for the court which summarizes the relevant facts, the law and a proposed analysis
+                to
+                bring to the two, on behalf of a litigant.
+              </div>
+            </div>
+
+            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+              <div class="section__circle-container__circle ">       <img alt="Thesis" class="serviceicon mx-auto d-flex justify-content-center" src="../assets/scholarship.svg">    
+              </div>
+            </div>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h4>Book Chapters</h4>
+                A chapter is one of the main divisions of a piece of writing of relative length, such as a book of
+                prose,
+                poetry, or law. A chapter book may have multiple chapters and can be referred to many things that may
+                be
+                the main topic of that specific chapter. In each case, chapters can be numbered or titled or both
+              </div>
+
+            </div>
+
+
+          </section>
+
+
+          <section class="section--footer mdl-color--white mdl-grid">
+            <div class="section__circle-container mdl-cell mdl-cell--1-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle "> <i class="material-icons">assignment_turned_in</i>
+              </div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>Plagiarism</h5>
+              Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur
+              ex.
+            </div>
+            <div class="section__circle-container mdl-cell mdl-cell--1-col mdl-cell--1-col-phone">
+              <div class="section__circle-container__circle "> <i class="material-icons">timer</i>
+              </div>
+            </div>
+            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+              <h5>Timing and Flexibility</h5>
+              Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur
+              ex.
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Details</h4>
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle "> <i class="material-icons">assignment_turned_in</i>
+                  </div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <h5>Plagiarism</h5>
+                  Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute
+                  et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                </div>
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle "> <i class="material-icons">security</i>
+                  </div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <h5>Guaranteed Delivery</h5>
+                  Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute
+                  et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                </div>
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                  <div class="section__circle-container__circle "> <i class="material-icons">timer</i>
+                  </div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                  <h5>Timing and Flexibility</h5>
+                  Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute
+                  et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                </div>
+              </div>
+              <div class="mdl-card__actions">
+                <a href="#" class="mdl-button">Read our features</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="mdl-mega-footer">
+          <div class="mdl-mega-footer--middle-section">
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Features</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Partners</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Details</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Spec</a></li>
+                <li><a href="#">Resources</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">Technology</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">How it works</a></li>
+                <li><a href="#">Usage</a></li>
+                <li><a href="#">Products</a></li>
+              </ul>
+            </div>
+            <div class="mdl-mega-footer--drop-down-section">
+              <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
+              <h1 class="mdl-mega-footer--heading">FAQ</h1>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a href="#">Questions</a></li>
+                <li><a href="#">Answers</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdl-mega-footer--bottom-section">
+            <div class="mdl-logo">
+              More Information
+            </div>
+            <ul class="mdl-mega-footer--link-list">
+              <li><a href="https://developers.google.com/web/starter-kit/">{{title}}</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Privacy and Terms</a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+  </div>
+  <a id="view-source" routerLink="/assignment" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Place
+    an Order
+  </a>
+</div>

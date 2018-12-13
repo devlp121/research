@@ -1,0 +1,37 @@
+@media (max-width:1026px){
+    .tlb{
+        background-color: rgba(0, 0, 0, 0.664);
+        display: visible;
+    }
+}
+@media (min-width:1026px){
+    .tlb{
+        background-color: rgba(0, 0, 0, 0.664);
+        display: none;
+    }
+    .tlb > a{
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.example-spacer{
+    flex: 1 1 auto;
+}
+a{
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+  }
+
+  .watfl{
+      background-color: rgba(0, 0, 0, 0.664);
+  }
+
+  .textform{
+      min-width: 55vw;
+      margin-bottom: 40px;
+  }
+.spacer{
+    flex: 0 1 1 auto;
+}
