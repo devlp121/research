@@ -14,13 +14,16 @@ import { MaterialModule } from './material.module';
 
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireAuthModule, AngularFireAuth } from "@angular/fire/auth";
 import { environment } from 'src/environments/environment';
 import { AssignmentComponent } from './front/assignment/assignment.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { OrdersComponent } from './admin/admin-components/orders/orders.component';
 import { CheckoutDialogComponent } from './front/checkout-dialog/checkout-dialog.component';
+import { SharedModule } from './shared.module';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -40,11 +43,14 @@ import { CheckoutDialogComponent } from './front/checkout-dialog/checkout-dialog
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase, 'locus'),
     AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
     AdminRoutingModule,
     AdminModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
