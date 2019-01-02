@@ -13,6 +13,7 @@ export class GlobalService {
   public cart = new BehaviorSubject({});
   public order = new BehaviorSubject({});
   public searchTerm = new BehaviorSubject('');
+  public site : string = "Research Locus";
 
   public slugify(text: string) {
     return text.toString().toLowerCase()

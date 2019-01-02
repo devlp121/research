@@ -24,6 +24,9 @@ import { CheckoutDialogComponent } from './front/checkout-dialog/checkout-dialog
 import { SharedModule } from './shared.module';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { DropZoneDirective } from './directives/dropzone.directive';
+import { HomeComponent } from './front/home/home.component';
+import { FileUploadPipe } from './pipes/file-upload.pipe';
 
 @NgModule({
   declarations: [
@@ -33,15 +36,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     FeaturesComponent,
     AssignmentComponent,
     OrdersComponent,
-    CheckoutDialogComponent
+    CheckoutDialogComponent,
+    DropZoneDirective,
+    HomeComponent,
+    FileUploadPipe
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase, 'locus'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,

@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Gamja+Flower');
+
+
 @media (max-width:1026px){
     .tlb{
         background-color: rgba(0, 0, 0, 0.664);
         display: visible;
+    }
+    .navigator{
+        display: none;
+    }
+    .menum{
+        display: visible;
+    }
+    .dropzone{
+        border: none;
     }
 }
 @media (min-width:1026px){
@@ -13,7 +25,19 @@
         text-decoration: none;
         color: white;
     }
+    .menum{
+        display: none;
+    }
 }
+
+.mdl-layout__header-row{
+    background: #4786c8;
+    color: white;
+}
+.mdl-layout-title{
+    font-family: 'Gamja Flower', cursive;
+    font-size: 35px;
+  }
 
 .example-spacer{
     flex: 1 1 auto;
@@ -42,13 +66,13 @@ a{
     flex-direction: column; 
     font-weight: 200;
     height: 300px;
-    border: 2px dashed #f16624;
+    border: 2px dashed #4786c8;
     border-radius: 5px;
     background: white;
     margin: 10px 0;
 
     &.hovering {
-        border: 2px solid #f16624;
+        border: 2px solid #4786c8;
         color: #dadada !important;
     }
 
@@ -63,4 +87,12 @@ progress::-webkit-progress-value {
 
 img {
     width: 250px
+}
+.mat-step-icon-selected{
+background-color: #4786c8;
+}
+
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: #4786c8;
+    color: #fff;
 }

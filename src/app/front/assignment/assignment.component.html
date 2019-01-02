@@ -1,134 +1,124 @@
-<!-- Uses a header that contracts as the page scrolls down. -->
-<style>
-  .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-      padding-right: 0;
-    }
-    </style>
-<mat-toolbar class="tlb">
-  <i class="material-icons" routerLink="/">arrow_back</i>
-  <a routerLink="/">Research Locus</a>
-  <span class="example-spacer"></span>
+
+<div class=" mdl-layout__header-row">
+  <!-- Title -->
+  <span class="mdl-layout-title" routerLink="/">Research Locus</span>
+  <!-- Add spacer, to align navigation to the right -->
+  <div class="mdl-layout-spacer"></div>
+  <!-- Navigation -->
+  <nav class="mdl-navigation navigator">
+    <button mat-button> <i class="material-icons">play_circle_filled</i> How it works</button>
+    <button mat-button *ngIf="!(user | async)" routerLink="/login" >Log in</button>
+    <button mat-button *ngIf="(user | async)" (click)="logout()" >Log out</button>
+    <button mat-stroked-button *ngIf="!(user | async)" routerLink="/register" >SIGN UP</button>
+  </nav>
+  <a class="mdl-navigation__link menum" [matMenuTriggerFor]="menu"><i class="material-icons">account_circle</i>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Account</button>
+      <button mat-menu-item *ngIf="!(user | async)" routerLink="/login">Login</button>
+      <button mat-menu-item *ngIf="(user | async)" (click)="logout()">Logout</button>
+      <button mat-menu-item *ngIf="!(user | async)" routerLink="/register" >SIGN UP</button>
+      <button mat-menu-item> <i class="material-icons">play_circle_filled</i> How it works</button>
+    </mat-menu>
+  </a>
+</div>
+
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Instructions</ng-template>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Assignment" formControlName="firstCtrl" required>
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint></mat-hint>
+        </mat-form-field>
+      </p>
+
+      <mat-form-field appearance="outline">
+        <mat-select placeholder="Type" required>
+          <mat-option *ngFor="let a of assignment" [value]="a.value">
+            {{a.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      
+      <mat-form-field class="textform" appearance="outline">
+          <textarea matInput placeholder="Enter Additional Assignment Instructions" class=""></textarea>
   
-  <i class="material-icons">account_circle</i>
-</mat-toolbar>
-<div class="demo-layout-waterfall mdl-layout mdl-js-layout">
-  <header class="mdl-layout__header mdl-layout__header--waterfall watfl">
-    <!-- Top row, always visible -->
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Username</span>
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                      mdl-textfield--floating-label mdl-textfield--align-right">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="waterfall-exp">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" name="sample" id="waterfall-exp">
+        </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Upload Documents</ng-template>
+      
+      <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+
+        <h3>Additional Uploads</h3>
+        <div class="file">
+          <label class="file-label">
+
+            <input class="file-input" type="file" (change)="startUpload($event.target.files)">
+
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+          </label>
         </div>
       </div>
-    </div>
-  </header>
-  <main class="mdl-layout__content">
-    <div class="page-content">
-      <div class="mdl-card mdl-cell mdl-cell--8-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-        <mat-horizontal-stepper [linear]="isLinear" #stepper>
-          <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel>1</ng-template>
-              <p>
-                <mat-form-field appearance="outline">
-                  <mat-label>Title</mat-label>
-                  <input matInput placeholder="Assignment" formControlName="firstCtrl" required>
-                  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                  <mat-hint></mat-hint>
-                </mat-form-field>
-              </p>
 
-              <mat-form-field appearance="outline">
-                <mat-select placeholder="Type" required>
-                  <mat-option *ngFor="let a of assignment" [value]="a.value">
-                    {{a.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>2</ng-template>
-              <mat-form-field class="textform" appearance="outline">
-                <textarea matInput placeholder="Enter Additional Assignment Instructions" class=""></textarea>
+      <div *ngIf="percentage | async as pct">
 
-              </mat-form-field>
-              <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
-              
-                <h3>File Drop Zone</h3>
-                <p>Drag and Drop a File</p>
-                <div class="file">
-                  <label class="file-label">
-              
-                    <input class="file-input" type="file" (change)="startUpload($event.target.files)">
-              
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fa fa-upload"></i>
-                      </span>
-                      <span class="file-label">
-                        or choose a file…
-                      </span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              
-              <div *ngIf="percentage | async as pct">
-              
-                <progress class="progress is-info" [value]="pct" max="100">
-                </progress>
-              
-                {{ pct | number }}%
-              
-              </div>
-              
-              <div *ngIf="(snapshot | async) as snap">
-                {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
-              
-              
-                <div *ngIf="downloadURL | async as url">
-                  <h3>Results!</h3>
-                  <img [src]="url"><br>
-                  <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
-                </div>
-                <hr>
-              
-                <button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
-                <button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
-                <button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
-              
-              
-              </div>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-            
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            You are now done.
-            <div class="donestep">
-              <button mat-button (click)="stepper.reset()">Reset</button>
-              <span class="spacer"></span>
-              <button mat-raised-button (click)="openDialog()"> CHECKOUT</button>
-            </div>
-          </mat-step>
-        </mat-horizontal-stepper>
-      </div><!-- Your content goes here -->
+        <progress class="progress is-info" [value]="pct" max="100">
+        </progress>
+
+        {{ pct | number }}%
+
+      </div>
+
+      <div *ngIf="(snapshot | async) as snap">
+        {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+
+
+        <div *ngIf="downloadUrl | async as url">
+          <h4>Uploaded</h4>
+          <img [src]="url"><br>
+          <p>{{file}}</p>
+          <a [href]="url" target="_blank" rel="noopener">View</a>
+        </div>
+        <hr>
+
+        <button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
+        <button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
+        <button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+
+
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div class="donestep">
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <span class="spacer"></span>
+      <button mat-raised-button (click)="openDialog()"> CHECKOUT</button>
     </div>
-  </main>
-</div>
+  </mat-step>
+</mat-horizontal-stepper>
