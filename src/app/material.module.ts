@@ -22,7 +22,10 @@ import {
   MatProgressSpinnerModule,
   MatChipsModule,
   MatStepperModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatTabsModule,
+  MatBadgeModule,
+  MatBadge
 } from '@angular/material';
 
 const components = [
@@ -47,7 +50,9 @@ const components = [
   MatProgressSpinnerModule,
   MatChipsModule,
   MatStepperModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatTabsModule,
+  MatBadgeModule
 ];
 
 @NgModule({

@@ -27,6 +27,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { DropZoneDirective } from './directives/dropzone.directive';
 import { HomeComponent } from './front/home/home.component';
 import { FileUploadPipe } from './pipes/file-upload.pipe';
+import { AccountComponent } from './front/account/account.component';
+import { CheckoutComponent } from './front/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { FileUploadPipe } from './pipes/file-upload.pipe';
     AssignmentComponent,
     OrdersComponent,
     CheckoutDialogComponent,
+    AccountComponent,
+    CheckoutComponent,
     DropZoneDirective,
     HomeComponent,
     FileUploadPipe

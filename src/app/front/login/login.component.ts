@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   admin: Observable<firebase.User>;
   newEmail: string;
   newPassword: string;
+  newUsername: string;
   showSignUp: boolean;
 
   constructor(

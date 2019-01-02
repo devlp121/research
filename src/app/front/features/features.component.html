@@ -13,7 +13,7 @@
     </nav>
     <a class="mdl-navigation__link menum" [matMenuTriggerFor]="menu"><i class="material-icons">account_circle</i>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Account</button>
+        <button mat-menu-item routerLink="/account" >Account</button>
         <button mat-menu-item *ngIf="!(user | async)" routerLink="/login">Login</button>
         <button mat-menu-item *ngIf="(user | async)" (click)="logout()">Logout</button>
         <button mat-menu-item *ngIf="!(user | async)" routerLink="/register">SIGN UP</button>

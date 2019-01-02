@@ -1,46 +1,71 @@
-@import url('https://fonts.googleapis.com/css?family=Gamja+Flower');
-
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
 @media (max-width:1026px){
-    .tlb{
-        background-color: rgba(0, 0, 0, 0.664);
-        display: visible;
-    }
-    .navigator{
-        display: none;
-    }
-    .menum{
-        display: visible;
-    }
+  .tlb{
+      background-color: rgba(0, 0, 0, 0.664);
+      display: visible;
+  }
+  .navigator{
+      display: none;
+  }
+  .menum{
+      display: visible;
+  }
+  .dropzone{
+      border: none;
+  }
+}
+@media (min-width:1026px){
+  .tlb{
+      background-color: rgba(0, 0, 0, 0.664);
+      display: none;
+  }
+  .tlb > a{
+      text-decoration: none;
+      color: white;
+  }
+  .menum{
+      display: none;
+  }
+}
+
+.mdl-layout__header-row{
+  background: #4786c8;
+  color: white;
+}
+.mdl-layout-title{
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+}
+
+.example-spacer{
+  flex: 1 1 auto;
+}
+a{
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+}
+
+.watfl{
+    background-color: rgba(0, 0, 0, 0.664);
+}
+
+.textform{
+    min-width: 55vw;
+    margin-bottom: 40px;
+}
+.spacer{
+  flex: 0 1 1 auto;
+}
+
+@media (max-width:1026px){
     .dropzone{
         border: none;
     }
 }
 @media (min-width:1026px){
-    .tlb{
-        background-color: rgba(0, 0, 0, 0.664);
-        display: none;
-    }
-    .tlb > a{
-        text-decoration: none;
-        color: white;
-    }
-    .menum{
-        display: none;
-    }
-}
-
-.mdl-layout__header-row{
-    background: #4786c8;
-    color: white;
-}
-.mdl-layout-title{
-    font-family: 'Gamja Flower', cursive;
-    font-size: 35px;
-  }
-
-.example-spacer{
-    flex: 1 1 auto;
+    
 }
 a{
     text-decoration: none;

@@ -1,3 +1,87 @@
-<p>
-  account works!
-</p>
+<div class=" mdl-layout__header-row">
+  <!-- Title -->
+  <span class="mdl-layout-title" routerLink="/">Research Locus</span>
+  <!-- Add spacer, to align navigation to the right -->
+  <div class="mdl-layout-spacer"></div>
+  <!-- Navigation -->
+  <nav class="mdl-navigation navigator">
+    <button mat-button> <i class="material-icons">play_circle_filled</i> How it works</button>
+    <button mat-button *ngIf="!(user | async)" routerLink="/login">Log in</button>
+    <button mat-button *ngIf="(user | async)" (click)="logout()">Log out</button>
+    <button mat-stroked-button *ngIf="!(user | async)" routerLink="/register">SIGN UP</button>
+  </nav>
+  <a class="mdl-navigation__link menum" [matMenuTriggerFor]="menu"><i class="material-icons">account_circle</i>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/account">Account</button>
+      <button mat-menu-item *ngIf="!(user | async)" routerLink="/login">Login</button>
+      <button mat-menu-item *ngIf="(user | async)" (click)="logout()">Logout</button>
+      <button mat-menu-item *ngIf="!(user | async)" routerLink="/register">SIGN UP</button>
+      <button mat-menu-item> <i class="material-icons">play_circle_filled</i> How it works</button>
+    </mat-menu>
+  </a>
+</div>
+
+
+<div class="container-fluid profile-holder">
+  <div class="row">
+    <div class="col-lg-3">
+      <mat-card>
+        <mat-list>
+          <h3 mat-subheader class="profile-orders-h">Orders</h3>
+          <mat-list-item>
+            <mat-icon mat-list-icon>hourglass_empty</mat-icon>
+            <span matBadge="4" matBadgeOverlap="false">
+              <h4 mat-line>Active</h4>
+            </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>done_all</mat-icon>
+            <span matBadge="4" matBadgeOverlap="false">
+              <h4 mat-line>Completed</h4>
+            </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>schedule</mat-icon>
+            <span matBadge="4" matBadgeOverlap="false">
+              <h4 mat-line>Under Waranty</h4>
+            </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>view_headline</mat-icon>
+
+            <span matBadge="4" matBadgeOverlap="false">
+              <h4 mat-line>All Orders</h4>
+            </span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-card>
+        <h3>{{cUser}}</h3>
+        <div class="profile">
+          <div class="photo"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/764024/profile/profile-512_1.jpg" /></div>
+          <div class="content">
+            <div class="text">
+              <h3>Order 33424</h3>
+              <h6>Details</h6>
+            </div>
+            <div class="btn"><span></span></div>
+          </div>
+          <div class="box"><i class="fa fa-codepen"></i><i class="fa fa-facebook"></i><i class="fa fa-github"></i><i
+              class="fa fa-tumblr"></i><i class="fa fa-twitter"></i></div>
+        </div>
+      </mat-card>
+
+    </div>
+    <div class="col-lg-3">
+      <mat-card>
+
+      </mat-card>
+    </div>
+  </div>
+</div>

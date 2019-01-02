@@ -1,36 +1,55 @@
-<div class="login-frame">
-  <div *ngIf="!(admin | async)?.uid">
-      <span class="bw block google-login">
-          <span *ngIf="showSignUp === false">Login</span>
-          <span *ngIf="showSignUp === true">Sign Up</span>
-      </span>
-  </div>
-  <div *ngIf="!(admin | async)?.uid">
-      <mat-form-field class="block">
-          <input matInput type="email" placeholder="email" [(ngModel)]="newEmail">
-      </mat-form-field>
-      <mat-form-field class="block">
-          <input matInput type="password" placeholder="password" minlength="6" [(ngModel)]="newPassword">
-      </mat-form-field>
-      <button mat-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
-          Login with Email
-      </button>
-  </div>
-  <div *ngIf="!(admin | async)?.uid">
-      <div *ngIf="showSignUp === false" class="sign-up-trigger">
-          Don't have an account? <a routerLink="/register">Sign up</a>
-      </div>
-      <div *ngIf="showSignUp === true">
-          <button mat-raised-button class="bw" (click)="signUpWithEmail()">
-              Sign Up with Email
-          </button>
-      </div>
-  </div>
-  <div *ngIf="showSignUp === true && !(admin | async)?.uid" class="sign-up-trigger">
-      Already have an account? <a routerLink="/login">Log in</a>
-  </div>
-  <div class="hint block-center" *ngIf="!(admin | async)?.uid">
-      You must be an approved admin to access the admin panel
-  </div>
-  <button mat-button *ngIf="(admin | async)?.uid" (click)="logout()" class="logout">Logout</button>
+
+<div class="page">
+    <div class="container">
+        <div class="left">
+            <div class="login">Locus</div>
+            <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+        </div>
+        <div class="right">
+
+            <div class="form" *ngIf="!(admin | async)?.uid">
+                <div *ngIf="!(admin | async)?.uid">
+                    <span class="bw block google-login">
+                        <span *ngIf="showSignUp === false">Login</span>
+                        <span *ngIf="showSignUp === true">Sign Up</span>
+                    </span>
+                </div>
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="" type="text" [(ngModel)]="newUsername">
+                    <mat-icon matPrefix>account_box</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="" type="email" [(ngModel)]="newEmail">
+                    <mat-icon matPrefix>email</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="" type="password" minlength="6" [(ngModel)]="newPassword">
+                    <mat-icon matPrefix>security</mat-icon>
+                </mat-form-field>
+                <button mat-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
+                    Login with Email
+                </button>
+                <div *ngIf="!(admin | async)?.uid">
+                    <div *ngIf="showSignUp === false" class="sign-up-trigger">
+                        Don't have an account? <a routerLink="/register">Sign up</a>
+                    </div>
+                    <div *ngIf="showSignUp === true">
+                        <button mat-raised-button class="bw" (click)="signUpWithEmail()">
+                            Sign Up with Email
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="showSignUp === true && !(admin | async)?.uid" class="sign-up-trigger">
+                    Already have an account? <a routerLink="/login">Log in</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

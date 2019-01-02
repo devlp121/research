@@ -83,11 +83,8 @@ export class AssignmentComponent implements OnInit {
           photoURL: currentUser.photoURL,
           status: 'active'
         });
-
         
       }
-
-
     });
   }
 

@@ -1,29 +1,60 @@
-.dropzone { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
-    font-weight: 200;
-    height: 300px;
-    border: 2px dashed #f16624;
-    border-radius: 5px;
-    background: white;
-    margin: 10px 0;
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
-    &.hovering {
-        border: 2px solid #f16624;
-        color: #dadada !important;
-    }
-
-    .file-label {
-        font-size: 1.2em;
-    }
+@media (max-width:1026px){
+  .tlb{
+      background-color: rgba(0, 0, 0, 0.664);
+      display: visible;
+  }
+  .navigator{
+      display: none;
+  }
+  .menum{
+      display: visible;
+  }
+  .dropzone{
+      border: none;
+  }
+}
+@media (min-width:1026px){
+  .tlb{
+      background-color: rgba(0, 0, 0, 0.664);
+      display: none;
+  }
+  .tlb > a{
+      text-decoration: none;
+      color: white;
+  }
+  .menum{
+      display: none;
+  }
 }
 
-progress::-webkit-progress-value {
-    transition: width 0.1s ease;
+.mdl-layout__header-row{
+  background: #4786c8;
+  color: white;
+}
+.mdl-layout-title{
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
 }
 
-img {
-    width: 250px
+.example-spacer{
+  flex: 1 1 auto;
+}
+a{
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+}
+
+.watfl{
+    background-color: rgba(0, 0, 0, 0.664);
+}
+
+.textform{
+    min-width: 55vw;
+    margin-bottom: 40px;
+}
+.spacer{
+  flex: 0 1 1 auto;
 }
