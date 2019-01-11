@@ -29,6 +29,11 @@ import { HomeComponent } from './front/home/home.component';
 import { FileUploadPipe } from './pipes/file-upload.pipe';
 import { AccountComponent } from './front/account/account.component';
 import { CheckoutComponent } from './front/checkout/checkout.component';
+import { WalletdialogComponent } from './front/walletdialog/walletdialog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Buffer } from "buffer";
+import { MpesaService } from './services/mpesa.service';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +48,8 @@ import { CheckoutComponent } from './front/checkout/checkout.component';
     CheckoutComponent,
     DropZoneDirective,
     HomeComponent,
-    FileUploadPipe
+    FileUploadPipe,
+    WalletdialogComponent,
   ],
   imports: [
 
@@ -61,12 +67,17 @@ import { CheckoutComponent } from './front/checkout/checkout.component';
     AdminRoutingModule,
     AdminModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule,
+    
   ],
-  providers: [],
+  providers: [
+    MpesaService,
+    
+  ],
   bootstrap: [AppComponent],
   entryComponents:[
-    CheckoutDialogComponent
+    CheckoutDialogComponent, WalletdialogComponent
   ]
 })
 export class AppModule { }

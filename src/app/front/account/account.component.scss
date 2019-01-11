@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-
+/* The version of Bourbon used in this Pen was 4.* */
 
 @media (max-width:1026px){
   .tlb{
@@ -72,222 +72,190 @@ mat-card{
     margin-bottom: 20px;
     margin-left: 0;
 }
-.profile-orders-h{
-    font-size: 20px;
+
+.wallet {
+  --bg-color: #CEB2FC;
+  --bg-color-light: #F0E7FF;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
 }
 
-
-body, html {
-  margin: 0;
-  background: #ddd;
-  color: #7a7b7c;
-}
-
-body {
-  font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
-}
-
-.profile {
-  width: 330px;
-  height: 100px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  background-color: #fafafa;
-  box-shadow: 0 0 2rem #babbbc;
-  animation: show-profile 0.5s forwards ease-in-out;
-}
-@keyframes show-profile {
-  0% {
-    width: 0;
-  }
-}
-.profile .photo, .profile .content {
-  box-sizing: border-box;
-}
-.profile .photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.card {
+  width: 140px;
+  height: 207px;
+  background: #fff;
+  border-top-right-radius: 10px;
   overflow: hidden;
-  border: 5px solid #fafafa;
-  background-color: #fafafa;
-  margin-left: -50px;
-  box-shadow: 0 0 0.5rem #babbbc;
-  animation: rotate-photo 0.5s forwards ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+  transition: all 0.3s ease-out;
+  text-decoration: none;
 }
-@keyframes rotate-photo {
-  100% {
-    transform: rotate(-360deg);
-  }
+
+.card:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
 }
-.profile .photo img {
-  width: 100%;
+
+.card:hover .overlay {
+  transform: scale(4) translateZ(0);
 }
-.profile .content {
-  padding: 10px;
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+
+.card:hover .circle {
+  border-color: var(--bg-color-light);
+  background: var(--bg-color);
 }
-.profile .content::before {
-  content: "";
-  position: absolute;
-  width: 230px;
-  height: 150px;
-  background-color: #e9f3e6;
-  left: 0;
-  top: -20px;
-  z-index: -1;
-  transform: rotate(-8deg);
+
+.card:hover .circle:after {
+  background: var(--bg-color-light);
 }
-.profile .content .text {
-  margin-top: 20px;
-  margin-left: 50px;
+
+.card:hover p {
+  color: var(--text-color-hover);
 }
-.profile .content .text h3, .profile .content .text h6 {
-  font-weight: normal;
-  margin: 3px 0;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+
+.card:active {
+  transform: scale(1) translateZ(0);
+  box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+    0 15px 24px var(--box-shadow-color);
 }
-.profile .content .btn {
-  background-color: #abc;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  right: 25px;
-  top: 25px;
+
+.card p {
+  font-size: 17px;
+  color: #4C5656;
+  margin-top: 30px;
+  z-index: 1000;
+  transition: color 0.3s ease-out;
+}
+
+.circle {
+  width: 131px;
+  height: 131px;
   border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   z-index: 1;
-  cursor: pointer;
-  transition-duration: 0.3s;
-  animation: pop-btn 0.3s both ease-in-out 0.5s;
+  transition: all 0.3s ease-out;
 }
-@keyframes pop-btn {
-  0% {
-    transform: scale(0);
-  }
-  80% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.profile .content .btn:hover {
-  box-shadow: 0 0 0 5px rgba(170, 187, 204, 0.5);
-}
-.profile .content .btn span {
-  width: 60%;
-  height: 2px;
-  position: absolute;
-  background-color: white;
-  top: 50%;
-  left: 20%;
-  transform: translateY(-50%);
-  animation: to-hamburger 0.3s forwards ease-in-out;
-}
-.profile .content .btn span::before, .profile .content .btn span::after {
+
+.circle:after {
   content: "";
-  width: 100%;
-  height: 2px;
+  width: 118px;
+  height: 118px;
+  display: block;
   position: absolute;
-  background-color: white;
-  transition-duration: 0.3s;
-  transform: rotate(0deg);
-  right: 0;
-}
-.profile .content .btn span::before {
-  margin-top: -7px;
-}
-.profile .content .btn span::after {
-  margin-top: 7px;
-}
-.profile .content .btn.active span {
-  animation: to-arrow 0.3s forwards ease-in-out;
-}
-.profile .content .btn.active span::before, .profile .content .btn.active span::after {
-  width: 60%;
-  right: -1px;
-}
-.profile .content .btn.active span::before {
-  transform: rotate(45deg);
-}
-.profile .content .btn.active span::after {
-  transform: rotate(-45deg);
-}
-@keyframes to-hamburger {
-  from {
-    transform: translateY(-50%) rotate(-180deg);
-  }
-}
-@keyframes to-arrow {
-  from {
-    transform: translateY(-50%) rotate(0deg);
-  }
-  to {
-    transform: translateY(-50%) rotate(180deg);
-  }
-}
-.profile .box {
-  width: 150px;
-  height: 150px;
-  opacity: 0;
+  background: var(--bg-color);
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  top: 50%;
-  right: -40%;
-  transform: translate(-50%, -50%);
-  transition-duration: 0.3s;
+  top: 7px;
+  left: 7px;
+  transition: opacity 0.3s ease-out;
 }
-.profile .box i {
-  width: 50px;
-  height: 50px;
+
+.circle svg {
+  z-index: 10000;
+  transform: translateZ(0);
+}
+
+.overlay {
+  width: 118px;
+  position: absolute; 
+  height: 118px;
   border-radius: 50%;
-  background-color: #ececec;
-  font-size: 26px;
-  text-align: center;
-  line-height: 50px;
-  position: absolute;
-  left: 18px;
-  top: calc(75px - 50px/2);
-  box-shadow: 0 0 0.5rem #babbbc;
-  transition-duration: 0.3s;
+  background: var(--bg-color);
+  top: 70px;
+  left: 50px;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
 }
-.profile .box i:hover {
-  transition-delay: initial !important;
-  box-shadow: 0 0 0 5px #babbbc;
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: bottom;
 }
-.profile .box.open {
-  opacity: 1;
-}
-.profile .box.open i {
-  left: 60px;
-}
-.profile .box.open i:nth-of-type(1) {
-  transform: rotate(-90deg) translateX(120px) rotate(90deg);
-  transition-delay: 0s;
-}
-.profile .box.open i:nth-of-type(2) {
-  transform: rotate(-45deg) translateX(120px) rotate(45deg);
-  transition-delay: 0.1s;
-}
-.profile .box.open i:nth-of-type(3) {
-  transform: rotate(0deg) translateX(120px) rotate(0deg);
-  transition-delay: 0.2s;
-}
-.profile .box.open i:nth-of-type(4) {
-  transform: rotate(45deg) translateX(120px) rotate(-45deg);
-  transition-delay: 0.3s;
-}
-.profile .box.open i:nth-of-type(5) {
-  transform: rotate(90deg) translateX(120px) rotate(-90deg);
-  transition-delay: 0.4s;
+
+.recipe-card {
+	background: #fff;
+	margin: 4em auto;
+	width: 90%;
+	max-width: 496px;
+
+	article {
+		padding: 1.25em 1.5em;
+
+		ul {
+			list-style: none;
+			margin: 0.5em 0 0;
+			padding: 0;
+			li {
+				display: inline-block;
+				margin-left: 1em;
+				line-height: 1em;
+				&:first-child {
+					margin-left: 0;
+				}
+
+				.icon {
+				    vertical-align: bottom;
+				}
+
+				span:nth-of-type(2) {
+					margin-left: 0.5em;
+					font-size: 0.8em;
+					font-weight: 300;
+					vertical-align: middle;
+					color: #838689;
+				}
+			}
+		}
+
+		h2, h3 {
+			margin: 0;
+			font-weight: 300;
+		}
+
+		h2 {
+			font-size: em(28);
+			color: #222222;
+		}
+
+		h3 {
+			font-size: em(15);
+			color: #838689;
+		}
+
+		p {
+			margin: 1.25em 0;
+			font-size: em(13);
+			font-weight: 400;
+			color: #222222;
+
+			span {
+				font-weight: 700;
+				color: #000000;
+			}
+		}
+
+		.ingredients {
+			margin: 2em 0 0.5em;
+		}
+	}
+
+	.icon {
+	    display: inline;
+	    display: inline-block;
+      background-repeat: no-repeat;
+      color: #4786c8;
+      margin-right: 8px;
+	}
+
 }

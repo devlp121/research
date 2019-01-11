@@ -14,8 +14,14 @@ import { AngularFireDatabase } from "@angular/fire/database";
 import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/app'
 import { GlobalService } from "../../services/global.service";
+import { MpesaService } from "../../services/mpesa.service";
+import { error } from 'util';
+import { HttpResponse } from '@angular/common/http';
 
-
+export interface authToken{
+  access_token: string,
+  expires_in: string
+}
 
 export interface DialogData {
   animal: string;
@@ -69,6 +75,8 @@ export class AssignmentComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
 
+    public mpesa: MpesaService,
+
   ) {
 
 
@@ -83,7 +91,7 @@ export class AssignmentComponent implements OnInit {
           photoURL: currentUser.photoURL,
           status: 'active'
         });
-        
+
       }
     });
   }
@@ -130,7 +138,7 @@ export class AssignmentComponent implements OnInit {
     const file = event.item(0)
 
     // Client-side validation example
-    
+
 
     // The storage path
     const path = `instructions/${new Date().getTime()}_${file.name}`;
@@ -150,7 +158,7 @@ export class AssignmentComponent implements OnInit {
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
           this.db.collection('photos').add({ path, size: snap.totalBytes })
-          
+
         }
       })
     )
@@ -159,9 +167,9 @@ export class AssignmentComponent implements OnInit {
     console.log('files done:')
 
     this.task.snapshotChanges().pipe(
-      finalize(() => this.downloadUrl = imageRef.getDownloadURL() )
-   )
-  .subscribe()
+      finalize(() => this.downloadUrl = imageRef.getDownloadURL())
+    )
+      .subscribe()
   }
 
 
@@ -172,6 +180,15 @@ export class AssignmentComponent implements OnInit {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  tokenizer() {
+    this.mpesa.getConfig().subscribe(
+      function(){
+        console.log('body');
+      }
+    )
+
   }
 
 }

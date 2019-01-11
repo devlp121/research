@@ -1,123 +1,129 @@
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url("https://fonts.googleapis.com/css?family=Dancing+Script");
 
-@media (max-width:1026px){
-  .tlb{
-      background-color: rgba(0, 0, 0, 0.664);
-      display: visible;
+@media (max-width: 1026px) {
+  .tlb {
+    background-color: rgba(0, 0, 0, 0.664);
+    display: visible;
   }
-  .navigator{
-      display: none;
+  .navigator {
+    display: none;
   }
-  .menum{
-      display: visible;
+  .menum {
+    display: visible;
   }
-  .dropzone{
-      border: none;
+  .dropzone {
+    border: none;
   }
 }
-@media (min-width:1026px){
-  .tlb{
-      background-color: rgba(0, 0, 0, 0.664);
-      display: none;
+@media (min-width: 1026px) {
+  .tlb {
+    background-color: rgba(0, 0, 0, 0.664);
+    display: none;
   }
-  .tlb > a{
-      text-decoration: none;
-      color: white;
+  .tlb > a {
+    text-decoration: none;
+    color: white;
   }
-  .menum{
-      display: none;
+  .menum {
+    display: none;
   }
 }
 
-.mdl-layout__header-row{
+.mdl-layout__header-row {
   background: #4786c8;
   color: white;
 }
-.mdl-layout-title{
-  font-family: 'Dancing Script', cursive;
+.mdl-layout-title {
+  font-family: "Dancing Script", cursive;
   font-size: 35px;
 }
 
-.example-spacer{
+.example-spacer {
   flex: 1 1 auto;
 }
-a{
+a {
   text-decoration: none;
   color: white;
   margin-left: 10px;
 }
 
-.watfl{
-    background-color: rgba(0, 0, 0, 0.664);
+.watfl {
+  background-color: rgba(0, 0, 0, 0.664);
 }
 
-.textform{
-    min-width: 55vw;
-    margin-bottom: 40px;
+.textform {
+  min-width: 55vw;
+  margin-bottom: 40px;
 }
-.spacer{
+.spacer {
   flex: 0 1 1 auto;
 }
 
-@media (max-width:1026px){
-    .dropzone{
-        border: none;
-    }
+@media (max-width: 1026px) {
+  .dropzone {
+    border: none;
+  }
 }
-@media (min-width:1026px){
-    
+@media (min-width: 1026px) {
 }
-a{
-    text-decoration: none;
-    color: white;
-    margin-left: 10px;
+a {
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+}
+
+.watfl {
+  background-color: rgba(0, 0, 0, 0.664);
+}
+
+.textform {
+  min-width: 55vw;
+  margin-bottom: 40px;
+}
+.spacer {
+  flex: 0 1 1 auto;
+}
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 200;
+  height: 300px;
+  border: 2px dashed #4786c8;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+
+  &.hovering {
+    border: 2px solid #4786c8;
+    color: #dadada !important;
   }
 
-  .watfl{
-      background-color: rgba(0, 0, 0, 0.664);
+  .file-label {
+    font-size: 1.2em;
   }
-
-  .textform{
-      min-width: 55vw;
-      margin-bottom: 40px;
-  }
-.spacer{
-    flex: 0 1 1 auto;
 }
-.dropzone { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
-    font-weight: 200;
-    height: 300px;
-    border: 2px dashed #4786c8;
-    border-radius: 5px;
-    background: white;
-    margin: 10px 0;
-
-    &.hovering {
-        border: 2px solid #4786c8;
-        color: #dadada !important;
-    }
-
-    .file-label {
-        font-size: 1.2em;
-    }
-}
-
 progress::-webkit-progress-value {
-    transition: width 0.1s ease;
+  transition: width 0.1s ease;
 }
-
 img {
-    width: 250px
+  width: 250px;
 }
-.mat-step-icon-selected{
-background-color: #4786c8;
+.mat-step-icon-selected {
+  background-color: #4786c8;
 }
-
-.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-    background-color: #4786c8;
-    color: #fff;
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: #4786c8;
+  color: #fff;
+}
+mat-card-title {
+  text-align: center;
+  text-transform: uppercase;
+  color: #4786c8;
+}
+.payment-method-widget {
+  height: 60px;
 }
