@@ -22,9 +22,12 @@
   </a>
 </div>
 <button (click)="tokenizer()" class="mat-raised-button">
-Mpesa token generator
+Mpesa token generator 
 </button>
-
+{{oAuthToken}}
+<button (click)="lipaFunction()" class="mat-raised-button">
+  Lipa Mpesa Function
+  </button>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup" state="inst">
     <form [formGroup]="firstFormGroup">
