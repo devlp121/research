@@ -31,8 +31,8 @@ import { AccountComponent } from './front/account/account.component';
 import { CheckoutComponent } from './front/checkout/checkout.component';
 import { WalletdialogComponent } from './front/walletdialog/walletdialog.component';
 import { HttpClientModule } from '@angular/common/http';
-import { Buffer } from "buffer";
 import { MpesaService } from './services/mpesa.service';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -72,7 +72,7 @@ import { MpesaService } from './services/mpesa.service';
     
   ],
   providers: [
-    MpesaService,
+    MpesaService, DatePipe
     
   ],
   bootstrap: [AppComponent],

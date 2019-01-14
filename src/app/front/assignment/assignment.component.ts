@@ -11,13 +11,9 @@ import { tap, finalize } from 'rxjs/operators';
 
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireDatabase } from "@angular/fire/database";
-import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/app'
 import { GlobalService } from "../../services/global.service";
 import { MpesaService } from "../../services/mpesa.service";
-import { error } from 'util';
-import { HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 export interface authToken {
@@ -25,10 +21,7 @@ export interface authToken {
   expires_in: string
 }
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+
 
 export interface Assignment {
   value: string;
@@ -65,12 +58,13 @@ export class AssignmentComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  public json: JSON;
   public result: authToken;
 
   public oAuthToken: string;
   public oAuthExp: string;
   public lipaAuth: string;
-  url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+  public Amount: string = "5";
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -84,7 +78,7 @@ export class AssignmentComponent implements OnInit {
     public globalService: GlobalService,
 
     public mpesa: MpesaService,
-    public http: HttpClient
+    public http: HttpClient,
 
   ) {
 
@@ -192,50 +186,20 @@ export class AssignmentComponent implements OnInit {
   }
 
   tokenizer() {
-    this.mpesa.getConfig().subscribe(
-      body => {
-        this.result = body;
-        this.oAuthToken = this.result.access_token;
-        this.oAuthExp = this.result.expires_in;
-      }
-    )
+    this.mpesa.getConfig()
 
   }
 
-  lipaFunction() {
-    this.lipaAuth = "Bearer " + this.oAuthToken;
-    const json = {
-      "BusinessShortCode": "174379",
-      "Password": "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
-      "Timestamp": "2019-01-15T22:18:36+03:00",
-      "TransactionType": "CustomerPayBillOnline",
-      "Amount": "1",
-      "PartyA": "254701737488",
-      "PartyB": "174379",
-      "PhoneNumber": "254701737488",
-      "CallBackURL": "",
-      "AccountReference": " ",
-      "TransactionDesc": "Pay to Researh Locus and begin your transaction"
-    }
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': this.lipaAuth,
-        'Access-Control-Allow-Origin': "http://localhost:4200",
-        "Content-Type": "application/json",
-        'accept': 'application/json, application/xml'
-
-      })
-    };
-    console.log(this.lipaAuth, json)
-
-    this.http.post(this.url, json, httpOptions).pipe(
-      tap(
-        (body) => {
-          console.log("comming up" + body)
-        }
-      )
+  lipaFunct() {
+    this.mpesa.lipaFunction(this.Amount).subscribe(
+      response => {
+        console.log("Sucess", response);
+      },
+      error => {
+        console.log("Error", error);
+      }
+      
     )
-
   }
 
 }

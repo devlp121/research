@@ -1,0 +1,20 @@
+{
+    "/auth": {
+      "target": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+      "secure": false,
+      "logLevel":"debug",
+      "pathRewrite": {
+        "^/auth": ""
+      },
+      "changeOrigin": true
+    },
+    "/lipa": {
+      "target": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+      "secure": false,
+      "logLevel":"debug",
+      "pathRewrite": {
+        "^/lipa": ""
+      },
+      "changeOrigin": true
+    }
+  }
