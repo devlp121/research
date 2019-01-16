@@ -5,8 +5,8 @@ import { CheckoutDialogComponent } from "../checkout-dialog/checkout-dialog.comp
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable, interval } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -15,18 +15,29 @@ import * as firebase from 'firebase/app'
 import { GlobalService } from "../../services/global.service";
 import { MpesaService } from "../../services/mpesa.service";
 import { HttpClient } from '@angular/common/http';
+import { delay } from 'q';
 
 export interface authToken {
   access_token: string,
   expires_in: string
 }
 
-
+export interface userDef {
+  name: string;
+}
 
 export interface Assignment {
   value: string;
   viewValue: string;
 }
+export interface ResponseCode {
+  MerchantRequestID: string,
+  CheckoutRequestID: string,
+  ResponseCode: string,
+  ResponseDescription: string,
+  CustomerMessage: string
+}
+
 
 @Component({
   selector: 'app-assignment',
@@ -35,42 +46,39 @@ export interface Assignment {
 })
 export class AssignmentComponent implements OnInit {
   user: Observable<firebase.User>;
-
-
-  // Main task 
+  selectedValue: string;
+  selected: string;
   task: AngularFireUploadTask;
-
+  userCollection: Observable<any[]>
   // Progress monitoring
   percentage: Observable<number>;
-
   snapshot: Observable<any>;
-
   // Download URL
   downloadUrl: Observable<any>;
-
   // State for dropzone CSS toggling
   isHovering: boolean;
-
-
   animal: string;
   name: string;
-
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   public json: JSON;
   public result: authToken;
-
   public oAuthToken: string;
   public oAuthExp: string;
   public lipaAuth: string;
-  public Amount: string = "5";
+  public Amount: string;
+  public phoneNo: any;
+  userInfo: AngularFirestoreCollection<any>;
+  public item: AngularFirestoreDocument;
+  currentEmail: string;
+  respo: any;
 
   constructor(
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
     private storage: AngularFireStorage,
-    private db: AngularFirestore,
+    private afs: AngularFirestore,
 
     public title: Title,
     public datbs: AngularFireDatabase,
@@ -79,7 +87,6 @@ export class AssignmentComponent implements OnInit {
 
     public mpesa: MpesaService,
     public http: HttpClient,
-
   ) {
 
 
@@ -88,15 +95,30 @@ export class AssignmentComponent implements OnInit {
       globalService.user.next(currentUser);
 
       if (currentUser) {
-        this.datbs.object('/users/' + currentUser.uid).update({
+        this.afs.collection('/users/').doc(currentUser.uid).set({
           uid: currentUser.uid,
           email: currentUser.email,
           photoURL: currentUser.photoURL,
-          status: 'active'
+          status: 'active',
         });
-
+        this.currentEmail = currentUser.email
       }
+
+
+
+      var docRef = this.afs.collection('users').doc(this.currentEmail);
+      var getDoc = docRef.get()
+        .subscribe(doc => {
+          if (!doc.exists) {
+            console.log('No such document!');
+          } else {
+            this.phoneNo = doc.data()
+            console.log('Document data:', this.phoneNo);
+
+          }
+        })
     });
+
   }
 
   openDialog(): void {
@@ -122,9 +144,9 @@ export class AssignmentComponent implements OnInit {
     this.title.setTitle('Place an order')
   }
   assignment: Assignment[] = [
-    { value: 'book', viewValue: 'Book Chapters' },
-    { value: 'court', viewValue: 'Court Submissions' },
-    { value: 'thesis', viewValue: 'Thesis' }
+    { value: "1500", viewValue: 'Book Chapters' },
+    { value: "1500", viewValue: 'Court Submissions' },
+    { value: "1500", viewValue: 'Thesis' }
   ];
 
 
@@ -160,7 +182,7 @@ export class AssignmentComponent implements OnInit {
         console.log(snap)
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
-          this.db.collection('photos').add({ path, size: snap.totalBytes })
+          this.afs.collection('photos').add({ path, size: snap.totalBytes })
 
         }
       })
@@ -185,21 +207,23 @@ export class AssignmentComponent implements OnInit {
     this.afAuth.auth.signOut();
   }
 
-  tokenizer() {
-    this.mpesa.getConfig()
-
-  }
 
   lipaFunct() {
-    this.mpesa.lipaFunction(this.Amount).subscribe(
-      response => {
-        console.log("Sucess", response);
-      },
-      error => {
-        console.log("Error", error);
-      }
-      
-    )
+
+    this.mpesa.getConfig().subscribe(
+      () => this.mpesa.lipaFunction(this.selectedValue, this.phoneNo.phone).subscribe(
+        response => {
+          console.log("Sucess");
+          this.respo = response
+          console.log("Your"+ this.selected + "requested"+this.respo.CheckoutRequestID+"has been processed")
+        },
+        error => {
+          console.log("Error", error);
+        }
+      )
+    );
+
+
   }
 
 }

@@ -15,12 +15,13 @@
                     </span>
                 </div>
                 <mat-form-field appearance="outline">
-
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="" type="text" [(ngModel)]="newUsername">
-                    <mat-icon matPrefix>account_box</mat-icon>
-                </mat-form-field>
-
+                    <mat-label>Telephone</mat-label>
+                    <span matPrefix>+254 &nbsp;</span>
+                    <input type="tel" matInput placeholder="" [(ngModel)]="newCellphone">
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                  </mat-form-field>
+                  
+               
                 <mat-form-field appearance="outline">
 
                     <mat-label>Email</mat-label>

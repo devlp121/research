@@ -5,6 +5,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { Router }    from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from "@angular/fire/firestore";
 import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
 import { MatSnackBar } from '@angular/material';
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   admin: Observable<firebase.User>;
   newEmail: string;
   newPassword: string;
-  newUsername: string;
+  newCellphone: string;
   showSignUp: boolean;
 
   constructor(
@@ -29,8 +30,10 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public snackBar: MatSnackBar,
     private title: Title,
-    private meta: Meta
+    private meta: Meta,
+    public afs: AngularFirestore
   ) {
+    
 
     this.admin = afAuth.authState;
 
@@ -66,6 +69,8 @@ export class LoginComponent implements OnInit {
         });
       }
     });
+
+    
   }
 
   ngOnInit() {
@@ -78,7 +83,9 @@ export class LoginComponent implements OnInit {
   }
 
   signUpWithEmail() {
-    this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
+    this.afs.collection('/users/').doc(this.newEmail).set({
+      phone: '254' + this.newCellphone
+    });    this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
       let snackBarRef = this.snackBar.open(error.message, 'OK!', {
         duration: 3000
       });

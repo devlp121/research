@@ -14,6 +14,7 @@ export class GlobalService {
   public order = new BehaviorSubject({});
   public searchTerm = new BehaviorSubject('');
   public site : string = "Research Locus";
+  public phone : string;
 
   public slugify(text: string) {
     return text.toString().toLowerCase()

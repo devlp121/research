@@ -21,12 +21,8 @@
     </mat-menu>
   </a>
 </div>
-<button (click)="tokenizer()" class="mat-raised-button">
-Mpesa token generator 
-</button>
-<button (click)="lipaFunct()" class="mat-raised-button">
-  Lipa Mpesa Function
-  </button>
+
+
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup" state="inst">
     <form [formGroup]="firstFormGroup">
@@ -40,8 +36,8 @@ Mpesa token generator
         </mat-form-field>
       </p>
       <mat-form-field appearance="outline">
-        <mat-select placeholder="Type" required>
-          <mat-option *ngFor="let a of assignment" [value]="a.value">
+        <mat-select placeholder="Type" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" required>
+          <mat-option *ngFor="let a of assignment"   [value]="a.value">
             {{a.viewValue}}
           </mat-option>
         </mat-select>
@@ -122,7 +118,7 @@ Mpesa token generator
         <div class="col-lg-7">
           <mat-card>
             <mat-card-title>
-              Choose Your Payment Method
+              Preview Your Assignment Order
             </mat-card-title>
             <div class="payment-method-widget">
               <div class="pmw-left">
@@ -135,9 +131,9 @@ Mpesa token generator
           </mat-card>
         </div>
       </div>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="lipaFunct()">Pay</button>
       <span class="spacer"></span>
-      <button mat-raised-button (click)="openDialog()">Review</button>
+      <button mat-raised-button (click)="getAccess()">Review</button>
     </div>
   </mat-step>
   <ng-template matStepperIcon="inst">

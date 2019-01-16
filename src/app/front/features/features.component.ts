@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/app'
 import { GlobalService } from "../../services/global.service";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-features',
@@ -24,7 +25,8 @@ export class FeaturesComponent implements OnInit {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
-    public title : Title
+    public title : Title,
+    private afs: AngularFirestore
   ) {
 
 
@@ -33,20 +35,14 @@ export class FeaturesComponent implements OnInit {
       globalService.user.next(currentUser);
 
       if (currentUser) {
-        this.db.object('/users/' + currentUser.uid).update({
+        this.afs.collection('/users/').doc(currentUser.uid).set({
           uid: currentUser.uid,
           email: currentUser.email,
           photoURL: currentUser.photoURL,
-          status: 'active'
-        });
-
-        this.db.object('/users/' + currentUser.uid).valueChanges().subscribe((user:any) => {
-          if (user.cart) {
-            globalService.cart.next(user.cart);
-          }
+          status: 'active',
+          phone : '254'+ globalService
         });
       }
-
      
     });
   }
@@ -56,6 +52,7 @@ ngOnInit() {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.router.navigateByUrl('login');
   }
 
 }

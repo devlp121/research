@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpRequest, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { tap, retry, catchError } from 'rxjs/operators';
+import { tap, retry, catchError, delay } from 'rxjs/operators';
 import { Buffer } from 'buffer'
 import { Observable, throwError } from "rxjs";
 import { DatePipe } from '@angular/common';
@@ -58,17 +58,19 @@ export class MpesaService {
     };
     return this.http.get<authToken>("auth",
       httpOptions
-    ).subscribe(
-      body => {
+    ).pipe(
+      tap(body => {
         this.result = body;
         this.oAuthToken = this.result.access_token;
         this.oAuthExp = this.result.expires_in;
         console.log(this.oAuthExp, this.oAuthToken)
-      }
+      })
     );
   }
 
-  lipaFunction(ammount) {
+  lipaFunction(ammount, number) {
+
+
     this.lipaAuth = "Bearer " + this.oAuthToken;
 
     this.timeStamp = new Date()
@@ -83,11 +85,11 @@ export class MpesaService {
       "Timestamp": this.time,
       "TransactionType": "CustomerPayBillOnline",
       "Amount": ammount,
-      "PartyA": "254701737488",
+      "PartyA": number,
       "PartyB": this.BusinessShortcode,
-      "PhoneNumber": "254701737488",
+      "PhoneNumber": number,
       "CallBackURL": "https://console.firebase.google.com/project/research-locus/database/research-locus/data/users/2uSXI3Nv8fgaSeiVVmc9wrSqoQJ2",
-      "AccountReference": "test",
+      "AccountReference": "Research Locus",
       "TransactionDesc": "Pay to Researh Locus and begin your transaction"
     }
     this.httpOptions = {
