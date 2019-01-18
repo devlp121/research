@@ -20,8 +20,6 @@
     </mat-menu>
   </a>
 </div>
-
-
 <div class="container-fluid profile-holder">
   <div class="row">
     <div class="col-lg-3">
@@ -62,40 +60,24 @@
 
     <div class="col-lg-6">
       <mat-card>
-        <h3>{{cUser}}</h3>
+        <h3 class="ordertitle">Your Orders</h3>
         <div class="orders-container">
-            <mat-card>
-                <div class="recipe-card">
-                <article>
-                  <h2>Order Name</h2>
-                  <h3>Order Type</h3>
-                  <h4>Review</h4>
-                  <p>The best order done yet</p>
-                  <ul>
-                    <li><i class="material-icons icon">schedule</i><span>Deadline</span></li>
-                    <li><i class="material-icons icon">linear_scale</i><span>Under Waranty</span></li>
-                    <li><i class="material-icons icon">work_outline</i>10 pages</li>
-                    <li><i class="material-icons icon">equalizer</i>Intermediate</li>
-                  </ul>
-                </article>
-              </div>
-              </mat-card>
-              <mat-card>
-                  <div class="recipe-card">
-                  <article>
-                    <h2>Order Name</h2>
-                    <h3>Order Type</h3>
-                    <h4>Review</h4>
-                    <p>The best order done yet</p>
-                    <ul>
-                      <li><i class="material-icons icon">schedule</i><span>Deadline</span></li>
-                      <li><i class="material-icons icon">linear_scale</i><span>Under Waranty</span></li>
-                      <li><i class="material-icons icon">work_outline</i>10 pages</li>
-                      <li><i class="material-icons icon">equalizer</i>Intermediate</li>
-                    </ul>
-                  </article>
-                </div>
-                </mat-card>
+          <mat-card *ngFor="let a of items | async">
+            <div class="recipe-card">
+              <article>
+                <mat-card-title>{{a.orderTitle}}</mat-card-title>
+                <h4>Review</h4>
+                <h5>Order Number: {{a.transactionID}}</h5>
+                <p>{{a.orderDescription}}</p>
+                <ul>
+                  <li><i class="material-icons icon">schedule</i><span>Deadline</span></li>
+                  <li><i class="material-icons icon">linear_scale</i><span>Under Waranty</span></li>
+                  <li><i class="material-icons icon">work_outline</i>10 pages</li>
+                  <li><i class="material-icons icon">equalizer</i>Intermediate</li>
+                </ul>
+              </article>
+            </div>
+          </mat-card>
         </div>
       </mat-card>
     </div>

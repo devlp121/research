@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Title, Meta } from "@angular/platform-browser";
 import { CheckoutDialogComponent } from "../checkout-dialog/checkout-dialog.component";
 
@@ -16,6 +16,7 @@ import { GlobalService } from "../../services/global.service";
 import { MpesaService } from "../../services/mpesa.service";
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'q';
+import { DatePipe } from "@angular/common";
 
 export interface authToken {
   access_token: string,
@@ -45,6 +46,7 @@ export interface ResponseCode {
   styleUrls: ['./assignment.component.scss']
 })
 export class AssignmentComponent implements OnInit {
+  datePipe : DatePipe;
   user: Observable<firebase.User>;
   selectedValue: string;
   selected: string;
@@ -71,8 +73,15 @@ export class AssignmentComponent implements OnInit {
   public phoneNo: any;
   userInfo: AngularFirestoreCollection<any>;
   public item: AngularFirestoreDocument;
-  currentEmail: string;
-  respo: any;
+  public currentEmail: string;
+  public respo: any;
+  public titleValue: any;
+  public descValue: any;
+  public viewTag: any;
+  public timeStamp: any;
+  public time: any;
+  date: FormControl;
+  serializedDate: FormControl;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -88,6 +97,10 @@ export class AssignmentComponent implements OnInit {
     public mpesa: MpesaService,
     public http: HttpClient,
   ) {
+    this.date = new FormControl(new Date());
+    this.serializedDate = new FormControl((new Date()).toISOString());
+    console.log(this.date.value)
+  
 
 
     this.user = afAuth.authState;
@@ -135,7 +148,8 @@ export class AssignmentComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      titleCtrl: ['', Validators.required],
+      descCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -145,10 +159,9 @@ export class AssignmentComponent implements OnInit {
   }
   assignment: Assignment[] = [
     { value: "1500", viewValue: 'Book Chapters' },
-    { value: "1500", viewValue: 'Court Submissions' },
-    { value: "1500", viewValue: 'Thesis' }
+    { value: "2000", viewValue: 'Court Submissions' },
+    { value: "3000", viewValue: 'Thesis' }
   ];
-
 
 
   toggleHover(event: boolean) {
@@ -158,72 +171,63 @@ export class AssignmentComponent implements OnInit {
   startUpload(event: FileList) {
 
     const storageRef = firebase.storage().ref();
-
-    // The File object
     const file = event.item(0)
-
-    // Client-side validation example
-
-
-    // The storage path
     const path = `instructions/${new Date().getTime()}_${file.name}`;
     const imageRef = this.storage.ref(path);
-
-    // Totally optional metadata
     const customMetadata = { app: 'Customer uploaded instructions' };
-
-    // The main task
     this.task = this.storage.upload(path, file, { customMetadata })
-
-    // Progress monitoring
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(snap => {
         console.log(snap)
         if (snap.bytesTransferred === snap.totalBytes) {
-          // Update firestore on completion
           this.afs.collection('photos').add({ path, size: snap.totalBytes })
-
         }
       })
     )
-
-    // The file's download URL
     console.log('files done:')
-
     this.task.snapshotChanges().pipe(
       finalize(() => this.downloadUrl = imageRef.getDownloadURL())
     )
       .subscribe()
   }
-
-
-  // Determines if the upload task is active
   isActive(snapshot) {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
   }
-
   logout() {
     this.afAuth.auth.signOut();
   }
-
-
   lipaFunct() {
-
     this.mpesa.getConfig().subscribe(
       () => this.mpesa.lipaFunction(this.selectedValue, this.phoneNo.phone).subscribe(
         response => {
           console.log("Sucess");
           this.respo = response
-          console.log("Your"+ this.selected + "requested"+this.respo.CheckoutRequestID+"has been processed")
+          this.uploadOrder()
         },
         error => {
           console.log("Error", error);
         }
       )
     );
-
-
   }
 
+  uploadOrder() {
+    console.log(this.date.value)
+
+    this.timeStamp = new Date().getTime()
+    const path = `${this.timeStamp}`;
+    this.afs.collection('orders').doc(`/details/${this.currentEmail}/${this.timeStamp}`).set({    
+      orderTitle: this.titleValue,
+      orderDescription: this.descValue,
+      OrderAmount: this.selectedValue,
+      orderActive: 'active',
+      orderDeadline: this.date.value,
+      transactionID: this.respo.CheckoutRequestID}
+    ).then(
+      ()=>{
+        console.log('The order has been uploaded')
+      }
+    );
+  }
 }

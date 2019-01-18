@@ -6,7 +6,7 @@
   <!-- Navigation -->
   <nav class="mdl-navigation navigator">
     <button mat-button> <i class="material-icons">play_circle_filled</i> How it works</button>
-    <button mat-menu-item *ngIf="(user | async)" routerLink="/account">Account</button>
+    <button mat-button *ngIf="(user | async)" routerLink="/account">Account</button>
     <button mat-button *ngIf="!(user | async)" routerLink="/login">Log in</button>
     <button mat-button *ngIf="(user | async)" (click)="logout()">Log out</button>
     <button mat-stroked-button *ngIf="!(user | async)" routerLink="/register">SIGN UP</button>
@@ -30,22 +30,28 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Title</mat-label>
-          <input matInput placeholder="Assignment" formControlName="firstCtrl" required>
+          <input matInput placeholder="Assignment" formControlName="titleCtrl" [(ngModel)]="titleValue" required>
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           <mat-hint></mat-hint>
         </mat-form-field>
       </p>
       <mat-form-field appearance="outline">
-        <mat-select placeholder="Type" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" required>
-          <mat-option *ngFor="let a of assignment"   [value]="a.value">
+        <mat-select placeholder="Type" [(ngModel)]="selectedValue"  [ngModelOptions]="{standalone: true}" required>
+          <mat-option *ngFor="let a of assignment" [value]="a.value">
             {{a.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <br>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a deadline" [value]="date.value">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+      <br>
 
       <mat-form-field class="textform" appearance="outline">
-        <textarea matInput placeholder="Enter Additional Assignment Instructions" class=""></textarea>
+        <textarea matInput placeholder="Enter Additional Assignment Instructions" [(ngModel)]="descValue" formControlName="descCtrl" class=""></textarea>
 
       </mat-form-field>
       <div>
@@ -78,12 +84,9 @@
       </div>
 
       <div *ngIf="percentage | async as pct">
-
         <progress class="progress is-info" [value]="pct" max="100">
         </progress>
-
         {{ pct | number }}%
-
       </div>
 
       <div *ngIf="(snapshot | async) as snap">
@@ -120,13 +123,11 @@
             <mat-card-title>
               Preview Your Assignment Order
             </mat-card-title>
-            <div class="payment-method-widget">
-              <div class="pmw-left">
-
-              </div>
-              <div class="pmw-right">
-                
-              </div>
+            <div class="order-review">
+              <h4>Order Title</h4>
+              <p>{{titleValue}}</p>
+              <h5>Order Type</h5>
+              <p *ngIf="assignment.viewValue">{{a.viewValue}}</p>
             </div>
           </mat-card>
         </div>
