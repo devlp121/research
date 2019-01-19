@@ -38,6 +38,7 @@
     "popper.js": "^1.14.6",
     "requests": "^0.2.2",
     "rxjs": "~6.3.3",
+    "semantic-ui": "^2.4.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

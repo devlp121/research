@@ -46,7 +46,7 @@ export interface ResponseCode {
   styleUrls: ['./assignment.component.scss']
 })
 export class AssignmentComponent implements OnInit {
-  datePipe : DatePipe;
+  datePipe: DatePipe;
   user: Observable<firebase.User>;
   selectedValue: string;
   selected: string;
@@ -80,8 +80,8 @@ export class AssignmentComponent implements OnInit {
   public viewTag: any;
   public timeStamp: any;
   public time: any;
-  date: FormControl;
-  serializedDate: FormControl;
+  date: Date;
+  dateValue: FormControl;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -97,10 +97,6 @@ export class AssignmentComponent implements OnInit {
     public mpesa: MpesaService,
     public http: HttpClient,
   ) {
-    this.date = new FormControl(new Date());
-    this.serializedDate = new FormControl((new Date()).toISOString());
-    console.log(this.date.value)
-  
 
 
     this.user = afAuth.authState;
@@ -213,19 +209,23 @@ export class AssignmentComponent implements OnInit {
   }
 
   uploadOrder() {
-    console.log(this.date.value)
+
+    this.dateValue = new FormControl((new Date()));
+
+    console.log("The time chosen is "+this.date)
 
     this.timeStamp = new Date().getTime()
     const path = `${this.timeStamp}`;
-    this.afs.collection('orders').doc(`/details/${this.currentEmail}/${this.timeStamp}`).set({    
+    this.afs.collection('orders').doc(`/details/${this.currentEmail}/${this.timeStamp}`).set({
       orderTitle: this.titleValue,
       orderDescription: this.descValue,
       OrderAmount: this.selectedValue,
       orderActive: 'active',
-      orderDeadline: this.date.value,
-      transactionID: this.respo.CheckoutRequestID}
+      orderDeadline: this.date,
+      transactionID: this.respo.CheckoutRequestID
+    }
     ).then(
-      ()=>{
+      () => {
         console.log('The order has been uploaded')
       }
     );

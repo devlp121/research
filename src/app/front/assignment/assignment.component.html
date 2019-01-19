@@ -44,7 +44,7 @@
       </mat-form-field>
       <br>
       <mat-form-field class="example-full-width">
-        <input matInput [matDatepicker]="picker" placeholder="Choose a deadline" [value]="date.value">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a deadline" [formControl]="dateValue">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker></mat-datepicker>
       </mat-form-field>
@@ -127,14 +127,14 @@
               <h4>Order Title</h4>
               <p>{{titleValue}}</p>
               <h5>Order Type</h5>
-              <p *ngIf="assignment.viewValue">{{a.viewValue}}</p>
+              <p></p>
             </div>
           </mat-card>
         </div>
       </div>
       <button mat-button (click)="lipaFunct()">Pay</button>
       <span class="spacer"></span>
-      <button mat-raised-button (click)="getAccess()">Review</button>
+      <button mat-raised-button (click)="openDialog()">Review</button>
     </div>
   </mat-step>
   <ng-template matStepperIcon="inst">

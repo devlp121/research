@@ -36,21 +36,7 @@ import { DatePipe } from '@angular/common';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    LoginComponent,
-    FeaturesComponent,
-    AssignmentComponent,
-    OrdersComponent,
-    CheckoutDialogComponent,
-    AccountComponent,
-    CheckoutComponent,
-    DropZoneDirective,
-    HomeComponent,
-    FileUploadPipe,
-    WalletdialogComponent,
-  ],
+
   imports: [
 
     BrowserModule,
@@ -70,6 +56,21 @@ import { DatePipe } from '@angular/common';
     SharedModule,
     HttpClientModule,
     
+  ],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    LoginComponent,
+    FeaturesComponent,
+    AssignmentComponent,
+    OrdersComponent,
+    CheckoutDialogComponent,
+    AccountComponent,
+    CheckoutComponent,
+    DropZoneDirective,
+    HomeComponent,
+    FileUploadPipe,
+    WalletdialogComponent,
   ],
   providers: [
     MpesaService, DatePipe

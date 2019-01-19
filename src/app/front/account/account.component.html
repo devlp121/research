@@ -70,7 +70,7 @@
                 <h5>Order Number: {{a.transactionID}}</h5>
                 <p>{{a.orderDescription}}</p>
                 <ul>
-                  <li><i class="material-icons icon">schedule</i><span>Deadline</span></li>
+                  <li><i class="material-icons icon">schedule</i><span>Deadline : {{ a.orderDeadline.seconds * 1000 | date:'medium' }}</span></li>
                   <li><i class="material-icons icon">linear_scale</i><span>Under Waranty</span></li>
                   <li><i class="material-icons icon">work_outline</i>10 pages</li>
                   <li><i class="material-icons icon">equalizer</i>Intermediate</li>
