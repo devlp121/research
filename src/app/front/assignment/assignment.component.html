@@ -120,15 +120,35 @@
       <div class="row d-flex justify-content-center">
         <div class="col-lg-7">
           <mat-card>
-            <mat-card-title>
-              Preview Your Assignment Order
-            </mat-card-title>
-            <div class="order-review">
-              <h4>Order Title</h4>
-              <p>{{titleValue}}</p>
-              <h5>Order Type</h5>
-              <p></p>
-            </div>
+            <mat-list>
+              <h3 mat-subheader>Order Details</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>Order Title</h4>
+                <p mat-line>{{titleValue}}</p>
+              </mat-list-item>
+              <mat-list-item >
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>Amount</h4>
+                <p mat-line>{{selectedValue}}</p>
+              </mat-list-item>
+              <mat-list-item *ngIf="date">
+                <mat-icon mat-list-icon>schedule</mat-icon>
+                <h4 mat-line>Deadline</h4>
+                <p mat-line>{{date.seconds * 1000 | date:'medium'}}</p>
+              </mat-list-item>
+              <mat-list-item >
+                <mat-icon mat-list-icon>work_outline</mat-icon>
+                <h4 mat-line>Instructions</h4>
+                <p mat-line>{{descValue}}</p>
+              </mat-list-item>
+              <mat-list-item  *ngIf="downloadUrl">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <img [src]="url"><br>
+                <p>{{file}}</p>
+                <a [href]="url" target="_blank" rel="noopener">View</a>
+              </mat-list-item>
+            </mat-list>
           </mat-card>
         </div>
       </div>

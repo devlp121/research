@@ -27,6 +27,8 @@ import {
   MatBadgeModule,
   MatBadge
 } from '@angular/material';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+
 
 const components = [
   CommonModule,
@@ -52,7 +54,8 @@ const components = [
   MatStepperModule,
   MatAutocompleteModule,
   MatTabsModule,
-  MatBadgeModule
+  MatBadgeModule,
+  CdkStepperModule
 ];
 
 @NgModule({

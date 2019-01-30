@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@clr/ui": "^1.0.4",
     "@types/buffers": "^0.1.31",
     "@types/node": "^8.10.39",
     "bootstrap": "^4.2.1",
@@ -39,7 +40,10 @@
     "requests": "^0.2.2",
     "rxjs": "~6.3.3",
     "semantic-ui": "^2.4.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "@clr/angular": "^1.0.4",
+    "@clr/icons": "^1.0.4",
+    "@webcomponents/custom-elements": "^1.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

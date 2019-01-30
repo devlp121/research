@@ -33,6 +33,7 @@ import { WalletdialogComponent } from './front/walletdialog/walletdialog.compone
 import { HttpClientModule } from '@angular/common/http';
 import { MpesaService } from './services/mpesa.service';
 import { DatePipe } from '@angular/common';
+import { ClarityModule } from '@clr/angular';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { DatePipe } from '@angular/common';
     RouterModule,
     SharedModule,
     HttpClientModule,
+    ClarityModule,
     
   ],
   declarations: [

@@ -30,7 +30,6 @@ const routepaths: Routes = [
       }]
   }
 ];
-
 @NgModule({
   declarations: [],
   imports: [
@@ -40,4 +39,3 @@ const routepaths: Routes = [
   exports: [RouterModule]
 })
 export class AdminRoutingModule { }
-

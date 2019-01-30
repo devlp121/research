@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Title, Meta } from "@angular/platform-browser";
 import { CheckoutDialogComponent } from "../checkout-dialog/checkout-dialog.component";
-
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable, interval } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
-
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireDatabase } from "@angular/fire/database";
 import * as firebase from 'firebase/app'
@@ -96,6 +94,7 @@ export class AssignmentComponent implements OnInit {
 
     public mpesa: MpesaService,
     public http: HttpClient,
+    public matSnackBar: MatSnackBar
   ) {
 
 
@@ -123,6 +122,9 @@ export class AssignmentComponent implements OnInit {
           } else {
             this.phoneNo = doc.data()
             console.log('Document data:', this.phoneNo);
+            let snackBarRef = this.matSnackBar.open("Your Payment Phone number" , this.phoneNo.phone,{
+              duration: 2000
+            })
 
           }
         })
@@ -177,6 +179,7 @@ export class AssignmentComponent implements OnInit {
       tap(snap => {
         console.log(snap)
         if (snap.bytesTransferred === snap.totalBytes) {
+          console.log( path, snap.totalBytes)
           this.afs.collection('photos').add({ path, size: snap.totalBytes })
         }
       })
@@ -215,14 +218,17 @@ export class AssignmentComponent implements OnInit {
     console.log("The time chosen is "+this.date)
 
     this.timeStamp = new Date().getTime()
-    const path = `${this.timeStamp}`;
     this.afs.collection('orders').doc(`/details/${this.currentEmail}/${this.timeStamp}`).set({
       orderTitle: this.titleValue,
       orderDescription: this.descValue,
       OrderAmount: this.selectedValue,
       orderActive: 'active',
       orderDeadline: this.date,
-      transactionID: this.respo.CheckoutRequestID
+      checkoutID: this.respo.CheckoutRequestID,
+      BusinessShortCode: this.mpesa.BusinessShortcode ,
+      Password: this.mpesa.passWord,
+      Timestamp: this.mpesa.time,
+      documentUrl : [this.downloadUrl]
     }
     ).then(
       () => {
